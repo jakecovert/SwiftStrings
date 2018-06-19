@@ -17,12 +17,12 @@ class ViewController: UIViewController {
         let trimmedString = inputString.replacingOccurrences(of: " ", with: "")
         
         //Convert to lowerCase
-        //let caseTrimmedString = trimmedString.lowercased()
+        //The is the forward point of comparison..
         let caseTrimmedString = trimmedString.lowercased()
         
-        //Reverse
-        //let reversedString = caseTrimmedString.reversed()
-        let reversedString = String(caseTrimmedString.reversed())
+        //Reverse and lowercase
+        //The is the reverse point of comparison..
+        let reversedString = String(trimmedString.lowercased().reversed())
         
         print(reversedString)
         
