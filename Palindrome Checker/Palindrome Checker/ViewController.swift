@@ -10,25 +10,24 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    
     func isPalindrome(inputString:String) -> String {
         var isPanlindomeTrue: Bool
         
-        //Remove spaces
-        let trimmedString = inputString.replacingOccurrences(of: " ", with: "")
+        //Remove spaces and any special characters using extention at the bottom..
+        let  cleanString = inputString.stripped
         
         //Convert to lowerCase
         //The is the forward point of comparison..
-        let caseTrimmedString = trimmedString.lowercased()
+        let forwardString = cleanString.lowercased()
         
         //Reverse and lowercase
         //The is the reverse point of comparison..
-        let reversedString = String(trimmedString.lowercased().reversed())
-        
-        print(reversedString)
+        let reversedString = String(cleanString.lowercased().reversed())
         
         // Check if the string is the same backwards as forwards.
         // Based on that set, the flag correctly
-        if caseTrimmedString == reversedString {
+        if forwardString == reversedString {
             isPanlindomeTrue = true
         } else {
             isPanlindomeTrue = false
@@ -59,12 +58,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var textLabel: UILabel!
     
     @IBAction func checkIfPalindrome(_ sender: UIButton) {
-    
-        textLabel.text = verifyFieldText(optionalString: textField.text)
         
+        // Call the "verifyFieldText" function.
+        // Input is textField, and output is textLabel
+        textLabel.text = verifyFieldText(optionalString: textField.text)
     }
-    
-
-    
 }
 
+extension String {
+    
+    // Sourced from https://stackoverflow.com/questions/32851720/how-to-remove-special-characters-from-string-in-swift-2/32851930
+    // using Swift 4 answer from Maksim Kniazev.
+    var stripped: String {
+        let okayChars = Set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890")
+        return self.filter {okayChars.contains($0) }
+    }
+}
